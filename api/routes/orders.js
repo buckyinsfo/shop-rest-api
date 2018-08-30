@@ -8,14 +8,15 @@ const Product = require('../models/product')
 router.get('/', (req, res, next) => {
     Order
         .find()
-        .select('productId quantity _id')
+        .select('product quantity _id')
+        .populate('product')
         .exec()
         .then( docs => {
             const response = {
                 count: docs.length,
                 orders: docs.map( doc => {
                     return {
-                        productId: doc.productId,
+                        product: doc.product,
                         quantity: doc.quantity,
                         _id: doc._id,
                         request: {
@@ -37,17 +38,17 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    Product.findById( req.body.productId )
+    Product.findById( req.body.product )
         .then( product => {
             if ( !product ) {
                 return res.status(500).json({
-                    message: 'ProductId not found in system',
+                    message: 'Product not found in system',
                 })
             }
 
             const order = new Order({
                 _id: mongoose.Types.ObjectId(),
-                productId: req.body.productId,
+                product: req.body.product,
                 quantity: req.body.quantity,
             })
             return order.save()
@@ -58,7 +59,7 @@ router.post('/', (req, res, next) => {
                 message: 'Handle POST requests to /orders',
                 createdOrder: {
                     _id: result._id,
-                    productId: result.productId,
+                    product: result.product,
                     quantity: result.quantity,
                     request: {
                         desc: "List specific order",
@@ -113,7 +114,7 @@ router.delete('/:orderId', (req, res, next) => {
                     type: 'POST',
                     url: "http://localhost:3001/",
                     body: {
-                        productId: 'ID',
+                        product: 'ID',
                         quantity: 'Number',
                     }
                 }
