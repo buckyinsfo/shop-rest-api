@@ -4,8 +4,6 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-//const Product = require('./models/product')
-
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/orders')
 
@@ -16,8 +14,7 @@ mongoose.connect(
     {
         useNewUrlParser: true,
     })
-
-//mongoose.model('Product', productSchema)
+mongoose.Promise = global.Promise
 
 console.log( process.env.MONGO_ATLAS_PW )
 
