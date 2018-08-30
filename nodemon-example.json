@@ -1,6 +1,6 @@
 {
-    "comment": "/* Rename this file to 'nodemon.json and edit with your setup values./",
+    "comment": "/* Rename this file to 'nodemon.json' and edit to include your setup values. */",
     "env": {
-        "MONGO_ATLAS_PW": "ApiPlayProj1234"
+        "MONGO_ATLAS_PW": "MY_PASSWORD_12345"
     }
 }
