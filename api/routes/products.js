@@ -1,22 +1,44 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const multer = require('multer')
 
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, 'uploads/')
+    },
+    filename: (req, file, callback) => {
+        callback(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+    },
+    fileFilter: (req, file, callback) => {
+        if ( file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            callback(null, true)
+        } else {
+            callback(null, false)
+        }
+    },
+    limits: {
+        fileSize: 1024 * 1024 * 1024,
+    },
+})
+
+const upload = multer({storage})
 const Product = require('../models/product')
 
 router.get('/', (req, res, next) => {
     Product
         .find()
-        .select( "name price _id" )
+        .select( "name price _id productImage" )
         .exec()
         .then( docs => {
             const response = {
                 count: docs.length,
                 products: docs.map( doc => {
                     return {
+                        _id: doc._id,
                         name: doc.name,
                         price: doc.price,
-                        _id: doc._id,
+                        productImage: doc.productImage,
                         request: {
                             desc: "List specific product",
                             type: 'GET',
@@ -35,12 +57,15 @@ router.get('/', (req, res, next) => {
         })
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', upload.single('productImage'), (req, res, next) => {
+    console.log(req.file)
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price,
+        productImage: req.file.path,
     })
+    
     product
         .save()
         .then( result => {
@@ -48,9 +73,10 @@ router.post('/', (req, res, next) => {
             res.status(201).json({
                 message: "Handle POST requests to /products",
                 createdProduct: {
+                    _id: result._id,
                     name: result.name,
                     price: result.price,
-                    _id: result._id,
+                    productImage: result.productImage,
                     request: {
                         desc: "List specific product",
                         type: "GET",
@@ -70,6 +96,7 @@ router.post('/', (req, res, next) => {
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId
     Product.findById(id)
+        .select('_id name price productImage')
         .exec()
         .then(doc => {
             console.log( doc )
