@@ -1,0 +1,79 @@
+POST Signup body
+{
+	"email": "sometwo@example.com",
+	"password": "password123"
+}
+
+PATCH body
+[
+	{ "propName": "name", "value": "Pumpkin Bagel" },
+	{ "propName": "price", "value": "3.52" }
+]
+
+GET Response
+{
+    "count": 11,
+    "products": [
+        {
+            "_id": "5b85891607af3d2a00585bcb",
+            "name": "Everything Bagel",
+            "price": 3.57,
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b85891607af3d2a00585bcb"
+            }
+        },
+        {
+            "_id": "5b85c916b3d821033d63bd89",
+            "name": "Sesame Bagel",
+            "price": 3.49,
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b85c916b3d821033d63bd89"
+            }
+        },
+        {
+            "_id": "5b85d1850d933b09d5dc7df4",
+            "name": "Plain Bagel",
+            "price": 3.49,
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b85d1850d933b09d5dc7df4"
+            }
+        },
+        {
+            "_id": "5b88805e4a6f502039efaf4a",
+            "name": "Pumpkin Bagel",
+            "price": 3.52,
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b88805e4a6f502039efaf4a"
+            }
+        },
+        {
+            "_id": "5b88904aadbe310cf19d1534",
+            "name": "Poppy Seed",
+            "price": 1.89,
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b88904aadbe310cf19d1534"
+            }
+        },
+        {
+            "_id": "5b889b7a068ef6f39cf5f2e7",
+            "name": "Cinnamon Raisin",
+            "price": 1.89,
+            "productImage": "uploads\\2018-08-31T01-35-54.506Zlaptop300.jpg",
+            "request": {
+                "desc": "To list a specific product",
+                "type": "GET",
+                "url": "http://localhost:3001/products/5b889b7a068ef6f39cf5f2e7"
+            }
+        }
+    ]
+}

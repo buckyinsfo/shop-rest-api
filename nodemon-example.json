@@ -1,6 +1,7 @@
 {
     "comment": "/* Rename this file to 'nodemon.json' and edit to include your setup values. */",
     "env": {
-        "MONGO_ATLAS_PW": "MY_PASSWORD_12345"
+        "MONGO_ATLAS_PW": "MY_PASSWORD_12345",
+        "JWT_SECRET_KEY": "my_JWT_SecretKey"
     }
 }

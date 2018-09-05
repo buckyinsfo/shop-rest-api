@@ -28,6 +28,7 @@ router.patch('/:productId', authCheck, ProductController.patch_product_byId)
 
 router.delete('/:productId', authCheck, ProductController.delete_product_byId)
 
+
 ### /orders
 List, create, patch and delete products.
 

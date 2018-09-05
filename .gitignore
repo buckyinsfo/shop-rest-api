@@ -74,3 +74,6 @@ typings/
 
 # Nodemon configuration
 nodemon.json
+
+# Uploads directories
+uploads/

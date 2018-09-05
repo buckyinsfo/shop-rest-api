@@ -16,7 +16,7 @@ exports.get_all_products = (req, res, next) => {
                         price: doc.price,
                         productImage: doc.productImage,
                         request: {
-                            desc: "List specific product",
+                            desc: "To list a specific product",
                             type: 'GET',
                             url: "http://" + req.get('host') + "/products/" + doc._id,
                         }
@@ -54,7 +54,7 @@ exports.create = (req, res, next) => {
                     price: result.price,
                     productImage: result.productImage,
                     request: {
-                        desc: "List specific product",
+                        desc: "To list a specific product",
                         type: "GET",
                         url: "http://" + req.get('host') + "/products/" + result._id,
                     }
@@ -80,7 +80,7 @@ exports.get_product_byId = (req, res, next) => {
                 res.status(200).json({
                     product: doc,
                     request: {
-                        desc: "List all products",
+                        desc: "To list all products.",
                         type: "GET",
                         url: "http://" + req.get('host') + "/products",
                     }
@@ -108,6 +108,7 @@ exports.patch_product_byId = (req, res, next) => {
             res.status(200).json({
                 message: "Handle 'PATCH' request for updating product",
                 request: {
+                    desc: "To get a product's details.",
                     type: "GET",
                     url: "http://" + req.get('host') + "/products/" + result._id,
                 }
@@ -129,7 +130,7 @@ exports.delete_product_byId = (req, res, next) => {
             res.status(200).json({
                 message: "Handle 'DELETE' request for product",
                 request: {
-                    desc: "Add new product",
+                    desc: "To add a new product.",
                     type: 'POST',
                     url: "http://" + req.get('host') + "/products",
                     body: {
