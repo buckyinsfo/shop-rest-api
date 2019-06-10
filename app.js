@@ -11,7 +11,7 @@ const userRoutes = require('./api/routes/users')
 mongoose.connect( 
     'mongodb://admin:' + 
     process.env.MONGO_ATLAS_PW + 
-    '@shop-rest-api-shard-00-00-zs399.mongodb.net:27017,shop-rest-api-shard-00-01-zs399.mongodb.net:27017,shop-rest-api-shard-00-02-zs399.mongodb.net:27017/test?ssl=true&replicaSet=shop-rest-api-shard-0&authSource=admin&retryWrites=true',
+    process.env.MONGO_ATLAS_CONNECT,
     {
         useNewUrlParser: true,
     })
